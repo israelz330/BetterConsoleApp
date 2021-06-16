@@ -22,7 +22,7 @@ namespace ConsoleUI
                 for (int i = 0; i < _config.GetValue<int>("LoopTimes"); i++)
                 {
                     //This is #_
-                    _log.LogInformation("Run number { runNumber }", i);
+                    _log.LogWarning("Run number {runNumber}", i);
                 }
             }
         }

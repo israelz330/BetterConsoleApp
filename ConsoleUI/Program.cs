@@ -22,7 +22,7 @@ namespace ConsoleUI
                 .WriteTo.Console()
                 .CreateLogger();
 
-            Log.Logger.Information("Application Starging");
+            Log.Logger.Information("Application Starting");
 
             var host = Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
@@ -33,7 +33,7 @@ namespace ConsoleUI
                 .UseSerilog()
                 .Build();
 
-            var svc = ActivatorUtilities.CreateInstance<IGreetingService>(host.Services);
+            var svc = ActivatorUtilities.CreateInstance<GreetingService>(host.Services);
             svc.Run();
 
         }
@@ -42,7 +42,7 @@ namespace ConsoleUI
         {
             builder.SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json")
+                .AddJsonFile($"appsettings{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json") // ?? "Production"
                 .AddEnvironmentVariables();
         }
     }
